@@ -16,10 +16,10 @@ function gitmoji_fish
 
   set -l CMD "
     cat $CACHE_DIR/gitmojis.json \
-    | jq -r '.gitmojis[] | [.emoji , .code , .description] | @tsv' \
+    | jq -r '.gitmojis[] | [.code , .description] | @tsv' \
     | column -ts\t \
     | fzf $FZF_DEFAULT_OPTS \
-    | awk '{ print(\$2) }'
+    | awk '{ print(\$1) }'
   "
   set -l SHORTCODE (eval $CMD)
   if test -n "$SHORTCODE"
